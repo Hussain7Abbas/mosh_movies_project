@@ -1,4 +1,5 @@
 import * as genresAPI from "./fakeGenreService";
+import _ from 'lodash';
 
 const movies = [
   {
@@ -71,29 +72,46 @@ const movies = [
     genre: { _id: "5b21ca3eeb7f6fbccd471818", name: "Action" },
     numberInStock: 7,
     dailyRentalRate: 3.5,
-    like: false
+    like: true
   },
   {
-    _id: "5b21ca3eeb7f6fbccd47181f",
-    title: "The Sixth Sense",
-    genre: { _id: "5b21ca3eeb7f6fbccd471820", name: "Thriller" },
-    numberInStock: 4,
-    dailyRentalRate: 3.5,
-    like: false
+    _id: "5b21ca3eeb7f6fbccd471822",
+    title: "Spider Man No way Home",
+    genre: { _id: "5b21ca3eeb7f6fbccd471818", name: "Action" },
+    numberInStock: 5,
+    dailyRentalRate: 5.99,
+    like: true
   }
 ];
 
-export function getMovies(_pageNo = 1, _size = 3, _genre = { _id: 'all', name: 'All Genre' }) {
+
+
+export function getMovies(pageNo = 1, genreID = 'all', sortCol = "", sortOrder = "asc", size = 3) {
+
   let myMovies = movies;
-  if (_genre._id !== 'all') {
-    myMovies = myMovies.filter(movie => movie.genre.name === _genre.name);
+
+  // ─── NOTE Sorting ────────────────
+
+  if (sortCol !== "") {
+    myMovies = _.orderBy(myMovies, [sortCol], [sortOrder]);
   }
+
+
+  // ─── NOTE Genre ────────────────
+
+  if (genreID !== 'all') {
+    myMovies = myMovies.filter(movie => movie.genre._id === genreID);
+  }
+
+  // ─── NOTE Returning ────────────────
   return {
-    movies: myMovies.slice((_pageNo - 1) * _size, ((_pageNo - 1) * _size) + _size),
-    len: myMovies.length,
-    pagesLen: Math.ceil(myMovies.length / _size)
+    movies: myMovies.slice((pageNo - 1) * size, ((pageNo - 1) * size) + size),
+    dataLen: myMovies.length,
+    pagesLen: Math.ceil(myMovies.length / size)
   };
 }
+
+
 
 export function getMovie(id) {
   return movies.find(m => m._id === id);

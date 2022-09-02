@@ -5,7 +5,11 @@ import React from 'react';
 
 
 const _Like = probs => {
-  return (<FontAwesomeIcon style={{ cursor: 'pointer' }} onClick={probs.onClick} icon={probs.like ? faHeart : regFaHeart} />);
+
+  return (
+    <FontAwesomeIcon style={{ cursor: 'pointer' }} onClick={probs.onClick} icon={probs.like ? faHeart : regFaHeart} />
+  );
+
 };
 
 export default _Like;

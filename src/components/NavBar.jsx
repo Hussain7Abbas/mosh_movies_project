@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Navbar, Nav } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
+
 
 class NavBar extends Component {
   state = {};
@@ -8,11 +10,11 @@ class NavBar extends Component {
     return (
       <Navbar fixed="top" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+          <Navbar.Brand to='/'>Navbar</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <LinkContainer to='movies'><Nav.Link >Movies</Nav.Link></LinkContainer>
+            <LinkContainer to='about'><Nav.Link >About Us</Nav.Link></LinkContainer>
+            <LinkContainer to='contact'><Nav.Link >Contact Us</Nav.Link></LinkContainer>
           </Nav>
         </Container>
       </Navbar>

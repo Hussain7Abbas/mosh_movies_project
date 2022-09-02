@@ -2,13 +2,12 @@
 import Pagination from 'react-bootstrap/Pagination';
 import React from 'react';
 import propTypes from 'prop-types';
-import { faAngleLeft, faAngleRight, faAnglesLeft, faAnglesRight, faBackward, faForward } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight, faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const _Pagination = ({ activeNo, pagesLen, onChange }) => {
 
   if (pagesLen <= 1) return null;
-
 
   // ## ════════════════════╣  SECTION Create Pages Array  ╠════════════════════ ##
 
@@ -44,12 +43,12 @@ const _Pagination = ({ activeNo, pagesLen, onChange }) => {
   });
 
   items.unshift(
-    <Pagination.Prev onClick={() => onChange(activeNo === 1 ? 1 : activeNo - 1)} key={'prev'}>
+    <Pagination.Prev className="me-2" onClick={() => onChange(activeNo === 1 ? 1 : activeNo - 1)} key={'prev'}>
       {<FontAwesomeIcon icon={faAngleLeft} />}
     </Pagination.Prev>
   );
   items.push(
-    <Pagination.Next onClick={() => onChange(activeNo === pagesLen ? pagesLen : activeNo + 1)} key={'next'}>
+    <Pagination.Next className="ms-2" onClick={() => onChange(activeNo === pagesLen ? pagesLen : activeNo + 1)} key={'next'}>
       {<FontAwesomeIcon icon={faAngleRight} />}
     </Pagination.Next>
   );
@@ -71,7 +70,7 @@ const _Pagination = ({ activeNo, pagesLen, onChange }) => {
 
 
   return (
-    <Pagination>
+    <Pagination className="justify-content-center">
       {items}
     </Pagination>
   );

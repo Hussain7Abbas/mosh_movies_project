@@ -2,17 +2,18 @@ import React from 'react';
 import { ListGroup } from 'react-bootstrap';
 import propTypes from 'prop-types';
 
-const _ListGroup = ({ items, selectedItem, onItemSelect, idProperty, textProperty }) => {
+const _ListGroup = ({ items, selectedItemID, onItemSelect, idProperty, textProperty }) => {
   return (
     <ListGroup>
       {
         items.map(item => {
           return (
+
             < ListGroup.Item
               className="cur-pointer"
-              onClick={() => onItemSelect(item)}
+              onClick={() => onItemSelect(item[idProperty])}
               key={item[idProperty]}
-              active={selectedItem[idProperty] === item[idProperty]}>
+              active={selectedItemID === item[idProperty]}>
               {item[textProperty]}
             </ListGroup.Item>
           );
@@ -23,14 +24,14 @@ const _ListGroup = ({ items, selectedItem, onItemSelect, idProperty, textPropert
 };
 
 _ListGroup.defaultProps = {
-  selectedItem: { _id: 'all', name: 'All Genres' },
+  selectedItemID: 'all',
   idProperty: '_id',
   textProperty: 'name'
 };
 
 _ListGroup.propTypes = {
   onItemSelect: propTypes.func.isRequired,
-  selectedItem: propTypes.object.isRequired,
+  selectedItemID: propTypes.string.isRequired,
   items: propTypes.array.isRequired,
   idProperty: propTypes.string,
   textProperty: propTypes.string
